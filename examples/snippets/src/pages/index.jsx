@@ -1,5 +1,6 @@
 import { useEffect, useState } from "preact/hooks";
 import { Layout } from "../components/layout";
+import { CodeRender } from "../components/code-render";
 
 function useSnippets() {
   const [data, setData] = useState([]);
@@ -18,6 +19,7 @@ function useSnippets() {
       id: d.id,
       title: d.title,
       snippet: atob(d.snippet),
+      language: d.language,
     }));
   }
 
@@ -46,9 +48,7 @@ export default () => {
             <h1>
               {d.title}
             </h1>
-            <pre class="text-neutral-600 text-ellipsis whitespace-pre-wrap">
-              {d.snippet}
-            </pre>
+            <CodeRender code={d.snippet} lang={d.language}/>
           </a>
         ))}
       </div>

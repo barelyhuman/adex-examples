@@ -10,7 +10,7 @@ export default async (req, res) => {
 
   const data = await db("snippets")
     .where({ id: id })
-    .select(["id", "title", "snippet"])
+    .select(["id", "title", "snippet", "language"])
     .first();
   return res.json(data)
 };

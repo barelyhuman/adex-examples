@@ -13,7 +13,7 @@ export default async (req, res) => {
 async function get(req, res) {
   const snippets = await db("snippets")
     .where({})
-    .select(["id", "title", "snippet"]);
+    .select(["id", "title", "snippet", "language"]);
   return res.json(snippets);
 }
 
@@ -21,6 +21,7 @@ async function post(req, res) {
   const data = await req.parseBodyJSON(req);
   await db("snippets").insert({
     title: data.title,
+    language: data.language,
     snippet: Buffer.from(data.snippet, "base64").toString("base64"),
   });
   return res.json({
