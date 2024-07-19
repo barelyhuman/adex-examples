@@ -1,33 +1,33 @@
-import { useEffect, useState } from "preact/hooks";
-import { Layout } from "../components/layout";
-import { CodeRender } from "../components/code-render";
+import { useEffect, useState } from 'preact/hooks'
+import { Layout } from '../components/layout'
+import { CodeRender } from '../components/code-render'
 
 function useSnippets() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([])
   useEffect(() => {
-    fetchSnippets();
-  }, []);
+    fetchSnippets()
+  }, [])
 
   function fetchSnippets() {
-    fetch("/api/snippets")
-      .then((d) => d.json())
-      .then((d) => setData(d));
+    fetch('/api/snippets')
+      .then(d => d.json())
+      .then(d => setData(d))
   }
 
   function normalize(d) {
-    return d.map((d) => ({
+    return d.map(d => ({
       id: d.id,
       title: d.title,
       snippet: atob(d.snippet),
       language: d.language,
-    }));
+    }))
   }
 
-  return { snippets: normalize(data), refetch: fetchSnippets };
+  return { snippets: normalize(data), refetch: fetchSnippets }
 }
 
 export default () => {
-  const { snippets, refetch } = useSnippets();
+  const { snippets, refetch } = useSnippets()
 
   return (
     <Layout>
@@ -40,18 +40,16 @@ export default () => {
         </a>
       </div>
       <div class="grid gap-2 grid-cols-3 w-full">
-        {snippets.map((d) => (
+        {snippets.map(d => (
           <a
             href={`/snip/${d.id}`}
             class="flex-col flex gap-10 hover:cursor-pointer h-[350px] w-full overflow-hidden p-3 bg-neutral-800 rounded-md"
           >
-            <h1>
-              {d.title}
-            </h1>
-            <CodeRender code={d.snippet} lang={d.language}/>
+            <h1>{d.title}</h1>
+            <CodeRender code={d.snippet} lang={d.language} />
           </a>
         ))}
       </div>
     </Layout>
-  );
-};
+  )
+}

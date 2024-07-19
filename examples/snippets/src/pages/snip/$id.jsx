@@ -1,31 +1,36 @@
-import { useEffect, useState } from "preact/hooks";
-import { Layout } from "../../components/layout";
-import { CodeRender } from "../../components/code-render";
+import { useEffect, useState } from 'preact/hooks'
+import { Layout } from '../../components/layout'
+import { CodeRender } from '../../components/code-render'
 
 function useSnippet(id) {
-  const [data, setData] = useState({});
+  const [data, setData] = useState({})
   useEffect(() => {
-    fetchSnippet();
-  }, []);
+    fetchSnippet()
+  }, [])
 
   function fetchSnippet() {
     fetch(`/api/snippets/${id}`)
-      .then((d) => d.json())
-      .then((d) => setData(d));
+      .then(d => d.json())
+      .then(d => setData(d))
   }
 
   function normalize(d) {
     if (!Object.keys(d).length) {
-      return {};
+      return {}
     }
-    return { id: d.id, title: d.title, snippet: atob(d.snippet), language: d.language };
+    return {
+      id: d.id,
+      title: d.title,
+      snippet: atob(d.snippet),
+      language: d.language,
+    }
   }
 
-  return { snippet: normalize(data), refetch: fetchSnippet };
+  return { snippet: normalize(data), refetch: fetchSnippet }
 }
 
 export default ({ routeParams } = {}) => {
-  const { snippet, refetch } = useSnippet(routeParams.id);
+  const { snippet, refetch } = useSnippet(routeParams.id)
 
   return (
     <Layout>
@@ -35,9 +40,9 @@ export default ({ routeParams } = {}) => {
           {snippet.title}
         </h1>
         <div class="bg-neutral-800 w-full rounded-md p-2">
-            <CodeRender code={snippet.snippet} lang={snippet.language} />
+          <CodeRender code={snippet.snippet} lang={snippet.language} />
         </div>
       </div>
     </Layout>
-  );
-};
+  )
+}

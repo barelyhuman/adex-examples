@@ -2,12 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
-body{
-    @apply text-neutral-50 bg-neutral-900;
-    box-sizing: border-box;
+body {
+  @apply text-neutral-50 bg-neutral-900;
+  box-sizing: border-box;
 }
 
-pre.shiki{
-    @apply !bg-transparent !rounded-md p-3;
+pre.shiki {
+  @apply !bg-transparent !rounded-md p-3;
 }

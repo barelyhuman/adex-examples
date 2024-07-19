@@ -1,22 +1,17 @@
-
-import { useCallback, useEffect, useMemo, useState } from 'preact/hooks'
-import {
-	codeToHtml
-} from 'shiki'
-
+import { useEffect, useState } from 'preact/hooks'
+import { codeToHtml } from 'shiki'
 
 export function CodeRender({ code, lang }) {
-	let [highlightedHtml, setHighlightedHTML] = useState("")
-	
-	useEffect(() => {
-		codeToHtml(code, {
-			theme: "nord",
-			lang: lang
-		}).then(d => {
-			setHighlightedHTML(d)
-		})	
-	}, [code])
-	
+  let [highlightedHtml, setHighlightedHTML] = useState('')
 
-	return <div dangerouslySetInnerHTML={{ __html: highlightedHtml }}></div>
+  useEffect(() => {
+    codeToHtml(code, {
+      theme: 'vesper',
+      lang: lang,
+    }).then(d => {
+      setHighlightedHTML(d)
+    })
+  }, [code])
+
+  return <div dangerouslySetInnerHTML={{ __html: highlightedHtml }}></div>
 }

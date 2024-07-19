@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "fix": "prettier --write ."
+  },
+  "prettier": "@barelyhuman/prettier-config",
+  "devDependencies": {
+    "@barelyhuman/prettier-config": "^1.1.0",
+    "prettier": "^3.3.3"
+  }
+}
